@@ -31,8 +31,8 @@ async function getTimezone(req, res, next) {
   try {
     const ip_stud = req.ip_stud;
     // Pobranie informacji o strefie czasowej dla adresu IP klienta
-    const timezone_res = await axios.get(`http://ip-api.com/json/${ip_stud}`);
-    const timezone = timezone_res.data.timezone_res;
+    const timezone_res = await axios.get(`https://ipapi.co/${ip_stud}/timezone`)
+    const timezone = timezone_res.data
 
     // Przekazanie strefy czasowej do następnego middleware
     req.timezone = timezone;
