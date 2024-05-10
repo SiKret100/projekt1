@@ -28,6 +28,6 @@
 # Analiza i identyfikacja podatności
 ```docker scout cves dawidrut01/projekt1:v1```
 
-<img width="280" alt="Screenshot 2024-05-10 at 13 45 32" src="https://github.com/SiKret100/projekt1/assets/83550480/17d17aa7-dd07-43d7-871c-32e5f99214a1">
-<img width="826" alt="Screenshot 2024-05-10 at 13 45 23" src="https://github.com/SiKret100/projekt1/assets/83550480/2ff2f8ed-5491-4f41-b31d-f017e1349e68">
+<img width="284" alt="Screenshot 2024-05-10 at 13 53 23" src="https://github.com/SiKret100/projekt1/assets/83550480/407ac642-a45f-49fe-9791-c5f0c6fb88bd">
+<img width="827" alt="Screenshot 2024-05-10 at 13 52 51" src="https://github.com/SiKret100/projekt1/assets/83550480/de055931-c237-4b74-be1d-b1bc5feb28b2">
 
