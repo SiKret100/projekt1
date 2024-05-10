@@ -14,8 +14,9 @@ console.log(`Serwer nasłuchuje na porcie ${port}`)
 async function getIP(req, res, next) {
   try {
     // Pobranie adresu IP klienta
-    const ip_res = await axios.get('https://api.ipify.org?format=json')
-    const ip_stud = ip_res.data.ip
+    const ip_res = await axios.get('http://ip-api.com/json/')
+    console.log(ip_res)
+    const ip_stud = ip_res.data.query
 
     // Przekazanie IP do następnego middleware
     req.ip_stud = ip_stud;
@@ -32,10 +33,9 @@ async function getTimezone(req, res, next) {
     const ip_stud = req.ip_stud;
     // Pobranie informacji o strefie czasowej dla adresu IP klienta
     const timezone_res = await axios.get(`https://ipapi.co/${ip_stud}/timezone`)
-    const timezone = timezone_res.data
-
+    const my_timezone = timezone_res.data
     // Przekazanie strefy czasowej do następnego middleware
-    req.timezone = timezone;
+    req.timezone = my_timezone;
     next();
   } catch (error) {
     console.error(error);
@@ -47,10 +47,11 @@ async function getTimezone(req, res, next) {
 app.get('/', getIP, getTimezone, (req, res) => {
   try {
     const ip_stud = req.ip_stud;
-    const timezone = req.timezone;
+    const timezone1 = req.timezone; 
+    console.log(timezone1)
 
     // Uzyskanie daty i godziny w strefie czasowej klienta
-    const time_stud = new Date().toLocaleString('pl-PL', { timezone: timezone });
+    const time_stud = new Date().toLocaleString('pl-PL', { timeZone: timezone1 });
 
     // Tworzenie odpowiedzi HTML
     const html_text = 
