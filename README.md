@@ -8,10 +8,12 @@
 
 # Sprawdzenie uzyskanych informacjo, które wygenerował serwer w trakcie uruchamiania kontenera 
 ```docker logs testProjekt```
+
 <img width="357" alt="Screenshot 2024-05-10 at 13 30 56" src="https://github.com/SiKret100/projekt1/assets/83550480/2e984b62-8579-4541-88a1-e8085cfaaa46">
 
 # Sprawdzenie ile wartstw posiada zbudowany program
 ```docker history projekt1:v1```
+
 <img width="901" alt="Screenshot 2024-05-10 at 13 31 12" src="https://github.com/SiKret100/projekt1/assets/83550480/18198482-8a10-4a6e-b917-c6d79ca3bd44">
 
 # Sprawdzenie healthcheck
@@ -25,6 +27,7 @@
 
 # Analiza i identyfikacja podatności
 ```docker scout cves dawidrut01/projekt1:v1```
+
 <img width="280" alt="Screenshot 2024-05-10 at 13 45 32" src="https://github.com/SiKret100/projekt1/assets/83550480/17d17aa7-dd07-43d7-871c-32e5f99214a1">
 <img width="826" alt="Screenshot 2024-05-10 at 13 45 23" src="https://github.com/SiKret100/projekt1/assets/83550480/2ff2f8ed-5491-4f41-b31d-f017e1349e68">
 
