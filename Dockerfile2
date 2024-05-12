@@ -1,0 +1,52 @@
+# syntax=docker/dockerfile:1
+
+# Używamy pustego obrazu scratch jako podstawy do zbudowania naszego obrazu
+FROM scratch AS builder
+
+# Dodajemy mini system plików Alpine Linux do naszego obrazu.
+ADD alpine-minirootfs-3.19.1-aarch64.tar /
+
+# Ustawiamy argument VERSION, który będzie używany do określenia wersji aplikacji.
+ARG VERSION
+
+# Instalujemy niezbędne narzędzia i zależności
+RUN apk update && apk add --no-cache nodejs npm git openssh-client
+
+# Przygotowujemy SSH do klonowania z GitHuba
+RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh
+RUN ssh-keyscan github.com >> ~/.ssh/known_hosts && eval $(ssh-agent)
+
+# Klonujemy repozytorium projektu
+WORKDIR /usr
+RUN --mount=type=ssh git clone git@github.com:SiKret100/projekt1.git
+
+# Przechodzimy do katalogu źródłowego projektu i instalujemy zależności NPM
+WORKDIR /usr/projekt1/src
+RUN npm install
+COPY ./src/server.js ./
+
+# syntax=docker/dockerfile:1
+
+# Rozpoczynamy nowy etap budowy od obrazu Alpine Linux w najnowszej wersji
+FROM alpine:latest AS final
+
+# Ustawiamy argument VERSION i domyślnie przypisujemy mu wartość "1.0.0" jeśli nie został określony podczas budowy
+ARG VERSION=1.0.0
+ENV APP_VERSION=$VERSION
+
+# Instalujemy Node.js w końcowym obrazie
+RUN apk update && apk add --no-cache nodejs
+
+# Ustawiamy /usr/app jako katalog roboczy w końcowym obrazie
+WORKDIR /usr/app
+COPY --from=builder /usr/projekt1 /usr/app/
+
+# Informujemy Docker, że kontener nasłuchuje na porcie 81
+EXPOSE 81
+
+# Ustawiamy polecenie, które uruchomi naszą aplikację Node.js przy starcie kontenera
+CMD ["node", "src/server.js"]
+
+# Ustawiamy kontrolę stanu zdrowia aplikacji
+HEALTHCHECK --interval=15s --timeout=5s --start-period=5s --retries=5 \
+    CMD wget -q --spider http://localhost:3000 || exit 1
