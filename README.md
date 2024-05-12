@@ -31,7 +31,9 @@
 <img width="284" alt="Screenshot 2024-05-10 at 13 53 23" src="https://github.com/SiKret100/projekt1/assets/83550480/407ac642-a45f-49fe-9791-c5f0c6fb88bd">
 <img width="827" alt="Screenshot 2024-05-10 at 13 52 51" src="https://github.com/SiKret100/projekt1/assets/83550480/de055931-c237-4b74-be1d-b1bc5feb28b2">
 
-## Dodatkowe # Polecenie to buduje i wypycha do Docker Hub obraz Docker o nazwie dawidrut01/projekt1_new:v1, używając pliku Dockerfile2 i lokalnego agenta SSH dla wieloplatformowej kompilacji na architekturach ARM64 i AMD64 oraz wykorzystując cache z rejestru.
+## Dodatkowe 
+
+# Polecenie to buduje i wypycha do Docker Hub obraz Docker o nazwie dawidrut01/projekt1_new:v1, używając pliku Dockerfile2 i lokalnego agenta SSH dla wieloplatformowej kompilacji na architekturach ARM64 i AMD64 oraz wykorzystując cache z rejestru.
 ``` docker buildx build -f Dockerfile2 -t docker.io/dawidrut01/projekt1_new:v1 --ssh default=$SSH_AUTH_SOCK --platform linux/arm64,linux/amd64 --cache-from=type=registry,ref=docker.io/dawidrut01/projekt1_new:cache --cache-to=type=registry,ref=docker.io/dawidrut01/projekt1_new:cache,mode=max --push . ```
 
 # Pierwszy raz bez cache 
